@@ -15,6 +15,7 @@ use Pim\Bundle\CustomEntityBundle\Configuration\Registry;
 use Pim\Bundle\CustomEntityBundle\Entity\Repository\CustomEntityRepository;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Akeneo\Channel\Component\Repository\LocaleRepositoryInterface;
 
 /**
  * Generic denormalizer processor for reference data
@@ -44,25 +45,32 @@ class ReferenceDataProcessor implements ItemProcessorInterface, StepExecutionAwa
     /** @var StepExecution */
     protected $stepExecution;
 
+    /** @var LocaleRepositoryInterface */
+    protected $localeRepository;
+
     /**
+     * ReferenceDataProcessor constructor.
      * @param Registry $confRegistry
      * @param EntityManagerInterface $em
      * @param ObjectUpdaterInterface $updater
      * @param ValidatorInterface $validator
      * @param ObjectDetacherInterface $detacher
+     * @param LocaleRepositoryInterface $localeRepository
      */
     public function __construct(
         Registry $confRegistry,
         EntityManagerInterface $em,
         ObjectUpdaterInterface $updater,
         ValidatorInterface $validator,
-        ObjectDetacherInterface $detacher
+        ObjectDetacherInterface $detacher,
+        LocaleRepositoryInterface $localeRepository
     ) {
         $this->confRegistry = $confRegistry;
         $this->em           = $em;
         $this->updater      = $updater;
         $this->validator    = $validator;
         $this->detacher     = $detacher;
+        $this->localeRepository = $localeRepository;
     }
 
     /**
@@ -73,6 +81,8 @@ class ReferenceDataProcessor implements ItemProcessorInterface, StepExecutionAwa
         if (!isset($item['code'])) {
             throw new \RuntimeException(sprintf('Column "%s" is mandatory', 'code'));
         }
+
+        $item = $this->convertTranslatableFields($item);
 
         $entity = $this->findOrCreateObject($item);
         try {
@@ -192,5 +202,26 @@ class ReferenceDataProcessor implements ItemProcessorInterface, StepExecutionAwa
         $invalidItem = new FileInvalidItem($item, $itemPosition);
 
         throw new InvalidItemException($message, $invalidItem, [], 0, $previousException);
+    }
+
+    /**
+     * @param $item
+     * @param $locales
+     * @return array
+     */
+    private function convertTranslatableFields(array $item): array
+    {
+        foreach($this->localeRepository->getActivatedLocaleCodes() as $locale) {
+            foreach($item as $key => $value) {
+                $translatableField = explode('-', $key);
+                if(in_array($locale, $translatableField)) {
+                    $item[$translatableField[0] . 's'][$locale] = $value;
+                    unset($item[$key]);
+                }
+
+            }
+        }
+
+        return $item;
     }
 }
