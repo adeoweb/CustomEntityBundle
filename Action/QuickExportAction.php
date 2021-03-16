@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Akeneo\Platform\Bundle\UIBundle\Translator\TranslatorDecorator;
 
 /**
  * @author    Antoine Guigan <antoine@akeneo.com>
@@ -62,7 +63,7 @@ class QuickExportAction extends AbstractAction
         ActionEventManager $eventManager,
         ManagerRegistry $managerRegistry,
         RouterInterface $router,
-        TranslatorInterface $translator,
+        TranslatorDecorator $translator,
         MassActionDispatcher $massActionDispatcher,
         JobInstanceRepository $jobInstanceRepo,
         JobLauncherInterface $jobLauncher,
