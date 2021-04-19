@@ -2,8 +2,11 @@
 
 namespace Pim\Bundle\CustomEntityBundle\Normalizer\ExternalApi;
 
+use Akeneo\Tool\Component\Api\Hal\Link;
+use Akeneo\Tool\Component\FileStorage\Model\FileInfoInterface;
 use Pim\Bundle\CustomEntityBundle\Entity\AbstractCustomEntity;
 use Pim\Bundle\CustomEntityBundle\Entity\AbstractTranslatableCustomEntity;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
@@ -55,6 +58,39 @@ class MinimalExternalApiNormalizer implements NormalizerInterface
         }
 
         return $labels;
+    }
+
+    /**
+     * @param $fileInfo
+     * @param string|null $locale
+     * @param string|null $scope
+     *
+     * @return array|null
+     */
+    protected function getFileData($fileInfo, string $locale = null, string $scope = null): ?array
+    {
+        if (!$fileInfo) {
+            return null;
+        }
+
+        return [
+            'locale' => $locale,
+            'channel' => $scope,
+            'data' => $fileInfo->getKey(),
+            '_links' => $this->createLink($fileInfo)
+        ];
+    }
+
+    protected function createLink($file)
+    {
+        $route = $this->router->generate(
+            'veritas_api_media_file_list',
+            ['code' => $file->getKey()],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+        $link = new Link('download', $route);
+
+        return $link->toArray();
     }
 
     /**
