@@ -79,7 +79,7 @@ class MinimalExternalApiNormalizer implements NormalizerInterface
      *
      * @return array|null
      */
-    protected function getFileData($fileInfo, string $locale = null, string $scope = null): ?array
+    protected function getFileData($fileInfo, string $routing, string $locale = null, string $scope = null): ?array
     {
         if (!$fileInfo) {
             return null;
@@ -89,14 +89,14 @@ class MinimalExternalApiNormalizer implements NormalizerInterface
             'locale' => $locale,
             'channel' => $scope,
             'data' => $fileInfo->getKey(),
-            '_links' => $this->createLink($fileInfo)
+            '_links' => $this->createLink($fileInfo, $routing)
         ];
     }
 
-    protected function createLink($file)
+    protected function createLink($file, $routing)
     {
         $route = $this->router->generate(
-            'veritas_api_media_file_list',
+            $routing,
             ['code' => $file->getKey()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
