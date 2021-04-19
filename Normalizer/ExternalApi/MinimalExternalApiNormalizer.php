@@ -7,6 +7,7 @@ use Akeneo\Tool\Component\FileStorage\Model\FileInfoInterface;
 use Pim\Bundle\CustomEntityBundle\Entity\AbstractCustomEntity;
 use Pim\Bundle\CustomEntityBundle\Entity\AbstractTranslatableCustomEntity;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
@@ -17,6 +18,17 @@ class MinimalExternalApiNormalizer implements NormalizerInterface
 {
     /** @var array $supportedFormats */
     protected $supportedFormats = ['external_api'];
+
+    private $router;
+
+    /**
+     * ErpBrandNormalizer constructor.
+     * @param $router
+     */
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
 
     /**
      * @param AbstractTranslatableCustomEntity $entity
