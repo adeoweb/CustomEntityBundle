@@ -1,6 +1,6 @@
 <?php
 
-namespace Pim\Bundle\CustomEntityBundle\Normalizer\Standard;
+namespace Pim\Bundle\CustomEntityBundle\Normalizer\ExternalApi;
 
 use Pim\Bundle\CustomEntityBundle\Entity\AbstractCustomEntity;
 use Pim\Bundle\CustomEntityBundle\Entity\AbstractTranslatableCustomEntity;
