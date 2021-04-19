@@ -82,7 +82,11 @@ class MinimalExternalApiNormalizer implements NormalizerInterface
     protected function getFileData($fileInfo, string $routing, string $locale = null, string $scope = null): ?array
     {
         if (!$fileInfo) {
-            return null;
+            return [
+                'locale' => $locale,
+                'channel' => $scope,
+                'data' => null
+            ];
         }
 
         return [
