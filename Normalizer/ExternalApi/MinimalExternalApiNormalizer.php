@@ -38,7 +38,7 @@ class MinimalExternalApiNormalizer implements NormalizerInterface
      * @param string|null $scope
      * @return array
      */
-    private function valueNormalizer($data, string $locale = null, string $scope = null): array
+    protected function valueNormalizer($data, string $locale = null, string $scope = null): array
     {
         return ['locale' => $locale, 'scope' => $scope, 'data' => $data];
     }
