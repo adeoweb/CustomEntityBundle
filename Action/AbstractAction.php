@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Akeneo\Platform\Bundle\UIBundle\Translator\TranslatorDecorator;
 
 /**
  * @author    Antoine Guigan <antoine@akeneo.com>
@@ -67,7 +68,7 @@ abstract class AbstractAction implements RouteAwareActionInterface
         ActionEventManager $eventManager,
         ManagerRegistry $managerRegistry,
         RouterInterface $router,
-        TranslatorInterface $translator
+        TranslatorDecorator $translator
     ) {
         $this->actionFactory = $actionFactory;
         $this->eventManager = $eventManager;
