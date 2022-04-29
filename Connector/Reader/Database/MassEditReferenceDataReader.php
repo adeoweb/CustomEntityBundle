@@ -80,6 +80,10 @@ class MassEditReferenceDataReader implements ItemReaderInterface, StepExecutionA
     protected function getReferenceDatas($referenceDataName, array $ids)
     {
         $repository = $this->getRepository($referenceDataName);
+        
+        if (empty($ids)) {
+            return new ArrayCollection($repository->findAll());
+        }
 
         return $repository->findByIds($ids);
     }
