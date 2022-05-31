@@ -1,0 +1,6 @@
+#!/bin/sh
+
+docker run -u www-data \
+    -v ${HOST_COMPOSER_HOME:-~/.composer}:/var/www/.composer -e COMPOSER_HOME=/var/www/.composer \
+    -v "$(pwd)":/srv/pim -w /srv/pim \
+   --rm akeneo/pim-php-dev:6.0 php -d memory_limit=6G /usr/local/bin/composer "$@"
