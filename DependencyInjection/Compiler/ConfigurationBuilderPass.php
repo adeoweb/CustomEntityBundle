@@ -143,8 +143,8 @@ class ConfigurationBuilderPass implements CompilerPassInterface
      */
     protected function getConfigTree()
     {
-        $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('custom_entities');
+        $treeBuilder = new TreeBuilder('custom_entities');
+        $root = $treeBuilder->getRootNode();
         $root
             ->useAttributeAsKey('name')
             ->prototype('array')
