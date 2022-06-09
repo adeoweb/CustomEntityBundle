@@ -3,8 +3,8 @@
 namespace Pim\Bundle\CustomEntityBundle\Event;
 
 use Pim\Bundle\CustomEntityBundle\Configuration\ConfigurationInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Launched upon custom entity options configuration

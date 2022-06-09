@@ -123,6 +123,6 @@ class Configuration implements ConfigurationInterface
             'edit_form_extension' => null,
         ]);
         $event = new ConfigurationEvent($this, $resolver);
-        $this->eventDispatcher->dispatch(ConfigurationEvents::CONFIGURE, $event);
+        $this->eventDispatcher->dispatch($event, ConfigurationEvents::CONFIGURE);
     }
 }

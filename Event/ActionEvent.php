@@ -3,7 +3,7 @@
 namespace Pim\Bundle\CustomEntityBundle\Event;
 
 use Pim\Bundle\CustomEntityBundle\Action\ActionInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Basic event for actions

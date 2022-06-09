@@ -40,7 +40,7 @@ class ActionEventManager
     public function dipatchConfigureEvent(ActionInterface $action, OptionsResolver $optionsResolver): void
     {
         $event = new ConfigureActionEvent($action, $optionsResolver);
-        $this->eventDispatcher->dispatch(ActionEvents::CONFIGURE, $event);
+        $this->eventDispatcher->dispatch($event, ActionEvents::CONFIGURE);
     }
 
     /**
@@ -51,7 +51,7 @@ class ActionEventManager
     public function dispatchPreExecuteEvent(ActionInterface $action): void
     {
         $event = new ActionEvent($action);
-        $this->eventDispatcher->dispatch(ActionEvents::PRE_EXECUTE, $event);
+        $this->eventDispatcher->dispatch($event, ActionEvents::PRE_EXECUTE);
     }
 
     /**
@@ -65,7 +65,7 @@ class ActionEventManager
     public function dispatchPostExecuteEvent(ActionInterface $action, Response $response): Response
     {
         $event = new PostExecuteActionEvent($action, $response);
-        $this->eventDispatcher->dispatch(ActionEvents::POST_EXECUTE, $event);
+        $this->eventDispatcher->dispatch($event, ActionEvents::POST_EXECUTE);
 
         return $event->getResponse();
     }
@@ -82,7 +82,7 @@ class ActionEventManager
     public function dispatchPreRenderEvent(ActionInterface $action, $template, array $templateVars)
     {
         $event = new PreRenderActionEvent($action, $template, $templateVars);
-        $this->eventDispatcher->dispatch(ActionEvents::PRE_RENDER, $event);
+        $this->eventDispatcher->dispatch($event, ActionEvents::PRE_RENDER);
 
         return [$event->getTemplate(), $event->getTemplateVars()];
     }
