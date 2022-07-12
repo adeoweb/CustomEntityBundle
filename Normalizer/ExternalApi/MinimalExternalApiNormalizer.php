@@ -3,7 +3,6 @@
 namespace Pim\Bundle\CustomEntityBundle\Normalizer\ExternalApi;
 
 use Akeneo\Tool\Component\Api\Hal\Link;
-use Akeneo\Tool\Component\FileStorage\Model\FileInfoInterface;
 use Pim\Bundle\CustomEntityBundle\Entity\AbstractCustomEntity;
 use Pim\Bundle\CustomEntityBundle\Entity\AbstractTranslatableCustomEntity;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
