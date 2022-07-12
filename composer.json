@@ -17,7 +17,7 @@
         "akeneo/pim-community-dev": "^6.0.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^6.0",
+        "phpspec/phpspec": "^7.0",
         "friendsofphp/php-cs-fixer": "^2.14.0"
     },
     "autoload": {
