@@ -2,6 +2,7 @@
 
 namespace Pim\Bundle\CustomEntityBundle\Connector\Processor\Denormalization;
 
+use Akeneo\Channel\Component\Repository\LocaleRepositoryInterface;
 use Akeneo\Tool\Component\Batch\Item\FileInvalidItem;
 use Akeneo\Tool\Component\Batch\Item\InvalidItemException;
 use Akeneo\Tool\Component\Batch\Item\ItemProcessorInterface;
@@ -15,7 +16,6 @@ use Pim\Bundle\CustomEntityBundle\Configuration\Registry;
 use Pim\Bundle\CustomEntityBundle\Entity\Repository\CustomEntityRepository;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Akeneo\Channel\Component\Repository\LocaleRepositoryInterface;
 
 /**
  * Generic denormalizer processor for reference data
@@ -211,14 +211,13 @@ class ReferenceDataProcessor implements ItemProcessorInterface, StepExecutionAwa
      */
     private function convertTranslatableFields(array $item): array
     {
-        foreach($this->localeRepository->getActivatedLocaleCodes() as $locale) {
-            foreach($item as $key => $value) {
+        foreach ($this->localeRepository->getActivatedLocaleCodes() as $locale) {
+            foreach ($item as $key => $value) {
                 $translatableField = explode('-', $key);
-                if(in_array($locale, $translatableField)) {
+                if (in_array($locale, $translatableField)) {
                     $item[$translatableField[0] . 's'][$locale] = $value;
                     unset($item[$key]);
                 }
-
             }
         }
 

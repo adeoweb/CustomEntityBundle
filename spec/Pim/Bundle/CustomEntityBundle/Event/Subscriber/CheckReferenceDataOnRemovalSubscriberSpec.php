@@ -2,6 +2,8 @@
 
 namespace spec\Pim\Bundle\CustomEntityBundle\Event\Subscriber;
 
+use Akeneo\Channel\Component\Repository\ChannelRepositoryInterface;
+use Akeneo\Channel\Component\Repository\LocaleRepositoryInterface;
 use Akeneo\Tool\Component\StorageUtils\Event\RemoveEvent;
 use Akeneo\Tool\Component\StorageUtils\StorageEvents;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,9 +37,11 @@ class CheckReferenceDataOnRemovalSubscriberSpec extends ObjectBehavior
         AttributeRepository $attributeRepository,
         ProductQueryBuilderFactoryInterface $pqbFactory,
         Registry $configRegistry,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        LocaleRepositoryInterface $localeRepository,
+        ChannelRepositoryInterface $channelRepository
     ) {
-        $this->beConstructedWith($attributeRepository, $pqbFactory, $configRegistry, $em);
+        $this->beConstructedWith($attributeRepository, $pqbFactory, $configRegistry, $em, $localeRepository, $channelRepository);
     }
 
     function it_is_initializable()
@@ -75,11 +79,13 @@ class CheckReferenceDataOnRemovalSubscriberSpec extends ObjectBehavior
         $event->getSubject()->willReturn($refData);
         $refData->getCode()->willReturn('green');
         $refData->getCustomEntityName()->willReturn('color');
+        $attribute->isScopable()->willReturn(false);
+        $attribute->isLocalizable()->willReturn(false);
         $attribute->getCode()->willReturn('main_color');
         $attributeRepository->getAttributesByReferenceDataName('color')->willReturn([$attribute]);
 
         $pqbFactory->create()->willReturn($pqb);
-        $pqb->addFilter('main_color', Operators::IN_LIST, ['green'])->shouldBeCalled();
+        $pqb->addFilter('main_color', Operators::IN_LIST, ['green'], [])->shouldBeCalled();
         $pqb->execute()->willReturn($countable);
         $countable->count()->willReturn(0);
 
@@ -98,11 +104,13 @@ class CheckReferenceDataOnRemovalSubscriberSpec extends ObjectBehavior
         $event->getSubject()->willReturn($refData);
         $refData->getCode()->willReturn('green');
         $refData->getCustomEntityName()->willReturn('color');
+        $attribute->isScopable()->willReturn(false);
+        $attribute->isLocalizable()->willReturn(false);
         $attribute->getCode()->willReturn('main_color');
         $attributeRepository->getAttributesByReferenceDataName('color')->willReturn([$attribute]);
 
         $pqbFactory->create()->willReturn($pqb);
-        $pqb->addFilter('main_color', Operators::IN_LIST, ['green'])->shouldBeCalled();
+        $pqb->addFilter('main_color', Operators::IN_LIST, ['green'], [])->shouldBeCalled();
         $pqb->execute()->willReturn($countable);
 
         $countable->count()->willReturn(1);
@@ -153,12 +161,14 @@ class CheckReferenceDataOnRemovalSubscriberSpec extends ObjectBehavior
         $datasource->getResults()->willReturn([1, 3]);
 
         $attributeRepository->getAttributesByReferenceDataName('color')->willReturn([$attribute]);
+        $attribute->isScopable()->willReturn(false);
+        $attribute->isLocalizable()->willReturn(false);
         $attribute->getCode()->willReturn('main_color');
         $em->getRepository('MyColorFQCN')->willReturn($refDataRepository);
         $refDataRepository->findReferenceDataCodesFromIds([1, 3])->willReturn(['green', 'purple']);
 
         $pqbFactory->create()->willReturn($pqb);
-        $pqb->addFilter('main_color', Operators::IN_LIST, ['green', 'purple'])->shouldBeCalled();
+        $pqb->addFilter('main_color', Operators::IN_LIST, ['green', 'purple'], [])->shouldBeCalled();
         $pqb->execute()->willReturn($countable);
 
         $countable->count()->willReturn(0);
