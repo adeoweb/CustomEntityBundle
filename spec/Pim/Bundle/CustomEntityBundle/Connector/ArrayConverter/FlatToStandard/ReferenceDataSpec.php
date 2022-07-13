@@ -18,7 +18,7 @@ class ReferenceDataSpec extends ObjectBehavior
         $this->shouldImplement(ArrayConverterInterface::class);
     }
 
-    function it_does_not_update_non_label_fields()
+    function it_does_not_update_non_translation_fields()
     {
         $item = [
             'code' => 'my_code',
@@ -34,7 +34,7 @@ class ReferenceDataSpec extends ObjectBehavior
         $this->convert($item, [])->shouldReturn($item);
     }
 
-    function it_converts_label_translations()
+    function it_converts_translations()
     {
         $item = [
             'code' => 'my_code',
@@ -46,10 +46,16 @@ class ReferenceDataSpec extends ObjectBehavior
 
         $this->convert($item, [])->shouldReturn([
             'code' => 'my_code',
-            'labels' => [
-                'en_US' => 'An English label',
-                'fr_FR' => 'Un label en français',
-                'es_ES' => 'Un label en español',
+            'translations' => [
+                'en_US' => [
+                    'label' => 'An English label',
+                ],
+                'fr_FR' => [
+                    'label' => 'Un label en français',
+                ],
+                'es_ES' => [
+                    'label' => 'Un label en español',
+                ],
             ],
             'foo' => 'bar',
         ]);

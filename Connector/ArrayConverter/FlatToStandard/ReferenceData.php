@@ -26,10 +26,14 @@ class ReferenceData implements ArrayConverterInterface
      *
      * After:
      * [
-     *      'code'       => 'mycode',
-     *      'labels'     => [
-     *          'fr_FR' => 'T-shirt super beau',
-     *          'en_US' => 'T-shirt very beautiful',
+     *      'code'         => 'mycode',
+     *      'translations' => [
+     *          'fr_FR' => [
+     *              'label' => 'Label en français',
+     *           ],
+     *          'en_US' => [
+     *              'label' => 'Label in English',
+     *           ],
      *      ],
      *      'other_prop' => 'other_value',
      * ]
@@ -53,12 +57,14 @@ class ReferenceData implements ArrayConverterInterface
      */
     protected function convertField($convertedItem, $field, $data)
     {
-        if (false !== strpos($field, 'label-', 0)) {
-            $labelTokens = explode('-', $field);
-            $labelLocale = $labelTokens[1];
-            $convertedItem['labels'][$labelLocale] = $data;
-        } else {
+        if (false === strpos($field, '-')) {
             $convertedItem[$field] = $data;
+        } else {
+            $fieldTokens = explode('-', $field);
+            $fieldName = $fieldTokens[0];
+            $fieldLocale = $fieldTokens[1];
+
+            $convertedItem['translations'][$fieldLocale][$fieldName] = $data;
         }
 
         return $convertedItem;
