@@ -124,10 +124,14 @@ class UpdaterSpec extends ObjectBehavior
         \stdClass $associatedEntity
     ) {
         $data = [
-            'foo'    => 'related_entity_code',
-            'labels' => [
-                'en_US' => 'English label',
-                'fr_FR' => 'label français',
+            'foo' => 'related_entity_code',
+            'translations' => [
+                'en_US' => [
+                    'label' => 'English label',
+                ],
+                'fr_FR' => [
+                    'label' => 'label français',
+                ],
             ],
         ];
 
@@ -135,7 +139,7 @@ class UpdaterSpec extends ObjectBehavior
         $em->getClassMetadata(Argument::any())->willReturn($classMetadata);
         $classMetadata->getAssociationMappings()->willReturn(
             [
-                'foo'          => [
+                'foo' => [
                     'targetEntity' => 'Another\Custom\Entity',
                 ],
                 'translations' => [
@@ -151,8 +155,8 @@ class UpdaterSpec extends ObjectBehavior
         $referenceData->getTranslation('en_US')->willReturn($translationEn);
         $referenceData->getTranslation('fr_FR')->willReturn($translationFr);
 
-        $translationEn->setLabel('English label')->shouldBeCalled();
-        $translationFr->setLabel('label français')->shouldBeCalled();
+        $propertyAccessor->setValue($translationEn, 'label', 'English label')->shouldBeCalled();
+        $propertyAccessor->setValue($translationFr, 'label', 'label français')->shouldBeCalled();
 
         $propertyAccessor->setValue($referenceData, 'foo', $associatedEntity)->shouldBeCalled();
 

@@ -193,14 +193,24 @@ class Updater implements ObjectUpdaterInterface
      */
     protected function updateTranslations(AbstractTranslatableCustomEntity $referenceData, $propertyPath, $values): void
     {
-        foreach ($values as $locale => $value) {
+        foreach ($values as $locale => $localeValues) {
             if (!in_array($locale, $this->localeRepository->getActivatedLocaleCodes())) {
                 throw new \InvalidArgumentException(
                     sprintf('Locale "%s" is not activated', $locale)
                 );
             }
+
             $translation = $referenceData->getTranslation($locale);
-            $translation->setLabel($value);
+
+            if (!is_array($localeValues)) {
+                throw new \InvalidArgumentException(
+                    sprintf('The value of "%s" must be a two-dimensional array, but is not.', $propertyPath)
+                );
+            }
+
+            foreach ($localeValues as $propertyName => $value) {
+                $this->propertyAccessor->setValue($translation, $propertyName, $value);
+            }
         }
     }
 

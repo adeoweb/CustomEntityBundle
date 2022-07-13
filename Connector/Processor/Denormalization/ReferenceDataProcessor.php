@@ -214,8 +214,8 @@ class ReferenceDataProcessor implements ItemProcessorInterface, StepExecutionAwa
         foreach ($this->localeRepository->getActivatedLocaleCodes() as $locale) {
             foreach ($item as $key => $value) {
                 $translatableField = explode('-', $key);
-                if (in_array($locale, $translatableField)) {
-                    $item[$translatableField[0] . 's'][$locale] = $value;
+                if ($locale === ($translatableField[1] ?? null)) {
+                    $item['translations'][$locale][$translatableField[0]] = $value;
                     unset($item[$key]);
                 }
             }
