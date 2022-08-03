@@ -6,6 +6,7 @@ use Akeneo\Pim\Enrichment\Bundle\Doctrine\ORM\Repository\ReferenceDataRepository
 use Akeneo\Tool\Component\Api\Repository\PageableRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
+use Oro\Bundle\PimDataGridBundle\Doctrine\ORM\Repository\DatagridRepositoryInterface;
 
 /**
  * Repository for the custom entity
@@ -14,7 +15,8 @@ use Doctrine\ORM\QueryBuilder;
  * @copyright 2013 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class CustomEntityRepository extends ReferenceDataRepository implements PageableRepositoryInterface
+class CustomEntityRepository extends ReferenceDataRepository
+    implements DatagridRepositoryInterface, PageableRepositoryInterface
 {
     /**
      * Create a query builder used for the datagrid
