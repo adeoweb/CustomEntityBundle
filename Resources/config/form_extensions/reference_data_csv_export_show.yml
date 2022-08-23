@@ -2,121 +2,39 @@ extensions:
     reference-data-job-instance-csv-export-show:
         module: pim/form/common/edit-form
 
-    pim-job-instance-xlsx-base-export-show-main-image:
+    reference-data-job-instance-csv-export-show-main-image:
         module: pim/form/common/main-image
         parent: reference-data-job-instance-csv-export-show
         targetZone: main-image
         config:
-            path: bundles/pimui/images/illustration-export-xlsx.svg
+            path: bundles/pimui/images/illustrations/ExportCSV.svg
 
-    pim-job-instance-xlsx-base-export-show-breadcrumbs:
+    reference-data-job-instance-csv-export-show-user-navigation:
+        module: pim/menu/user-navigation
+        parent: reference-data-job-instance-csv-export-show
+        targetZone: user-menu
+        config:
+            userAccount: pim_menu.user.user_account
+            logout: pim_menu.user.logout
+
+    reference-data-job-instance-csv-export-show-breadcrumbs:
         module: pim/common/breadcrumbs
         parent: reference-data-job-instance-csv-export-show
         targetZone: breadcrumbs
         config:
             tab: pim-menu-exports
 
-    reference-data-job-instance-csv-export-show-tabs:
-        module: pim/form/common/form-tabs
+    reference-data-job-instance-csv-export-show-launch:
+        module: pim/job/common/edit/launch
         parent: reference-data-job-instance-csv-export-show
-        targetZone: content
-        position: 100
-
-    reference-data-job-instance-csv-export-show-properties:
-        module: pim/job/common/edit/properties
-        parent: reference-data-job-instance-csv-export-show-tabs
-        aclResourceId: pim_importexport_export_profile_property_edit
-        targetZone: container
-        position: 100
-        config:
-            tabTitle: pim_enrich.form.job_instance.tab.properties.title
-            tabCode: pim-job-instance-properties
-
-    reference-data-job-instance-csv-export-show-history:
-        module: pim/common/tab/history
-        parent: reference-data-job-instance-csv-export-show-tabs
-        targetZone: container
-        aclResourceId: pim_importexport_export_profile_history
-        position: 120
-        config:
-            class: Akeneo\Tool\Component\Batch\Model\JobInstance
-            title: pim_enrich.form.job_instance.tab.history.title
-            tabCode: pim-job-instance-history
-
-    reference-data-job-instance-csv-export-show-properties-code:
-        module: pim/job/common/edit/field/text
-        parent: reference-data-job-instance-csv-export-show-properties
-        position: 100
-        targetZone: properties
-        config:
-            fieldCode: code
-            label: pim_enrich.form.job_instance.tab.properties.code.title
-            readOnly: true
-
-    reference-data-job-instance-csv-export-show-properties-label:
-        module: pim/job/common/edit/field/text
-        parent: reference-data-job-instance-csv-export-show-properties
+        targetZone: meta
         position: 110
-        targetZone: properties
         config:
-            fieldCode: label
-            label: pim_enrich.form.job_instance.tab.properties.label.title
-            readOnly: true
-
-    reference-data-job-instance-csv-export-show-properties-file-path:
-        module: pim/job/common/edit/field/text
-        parent: reference-data-job-instance-csv-export-show-properties
-        position: 120
-        targetZone: properties
-        config:
-            fieldCode: configuration.filePath
-            readOnly: true
-            label: pim_enrich.form.job_instance.tab.properties.file_path.title
-            tooltip: pim_enrich.form.job_instance.tab.properties.file_path.help
-
-    reference-data-job-instance-csv-export-show-properties-delimiter:
-        module: pim/job/common/edit/field/text
-        parent: reference-data-job-instance-csv-export-show-properties
-        position: 130
-        targetZone: properties
-        config:
-            fieldCode: configuration.delimiter
-            readOnly: true
-            label: pim_enrich.form.job_instance.tab.properties.delimiter.title
-            tooltip: pim_enrich.form.job_instance.tab.properties.delimiter.help
-
-    reference-data-job-instance-csv-export-show-properties-enclosure:
-        module: pim/job/common/edit/field/text
-        parent: reference-data-job-instance-csv-export-show-properties
-        position: 140
-        targetZone: properties
-        config:
-            fieldCode: configuration.enclosure
-            readOnly: true
-            label: pim_enrich.form.job_instance.tab.properties.enclosure.title
-            tooltip: pim_enrich.form.job_instance.tab.properties.enclosure.help
-
-    reference-data-job-instance-csv-export-show-properties-with-header:
-        module: pim/job/common/edit/field/switch
-        parent: reference-data-job-instance-csv-export-show-properties
-        position: 150
-        targetZone: properties
-        config:
-            fieldCode: configuration.withHeader
-            readOnly: true
-            label: pim_enrich.form.job_instance.tab.properties.with_header.title
-            tooltip: pim_enrich.form.job_instance.tab.properties.with_header.help
-
-    reference-data-job-instance-csv-export-show-properties-reference-data-names:
-        module: custom_entity/field/select2
-        parent: reference-data-job-instance-csv-export-show-properties
-        position: 155
-        targetZone: properties
-        config:
-            fieldCode: configuration.reference_data_name
-            readOnly: true
-            label: pim_custom_entity.import.csv.entity_name.label
-            tooltip: pim_custom_entity.import.csv.entity_name.help
+            label: pim_import_export.form.job_instance.button.export.title
+            route: pim_enrich_job_instance_rest_export_launch
+            identifier:
+                path: code
+                name: code
 
     reference-data-job-instance-csv-export-show-label:
         module: pim/job/common/edit/label
@@ -124,33 +42,33 @@ extensions:
         targetZone: title
         position: 100
 
-    reference-data-job-instance-csv-export-show-meta:
-        module: pim/job/common/edit/meta
-        parent: reference-data-job-instance-csv-export-show
-        targetZone: meta
-        position: 100
-
     reference-data-job-instance-csv-export-show-edit:
         module: pim/common/redirect
         parent: reference-data-job-instance-csv-export-show
         targetZone: buttons
         position: 100
+        aclResourceId: pim_importexport_export_profile_edit
         config:
-            label: pim_enrich.form.job_instance.button.edit.title
+            label: pim_common.edit
             route: pim_importexport_export_profile_edit
             buttonClass: AknButton AknButton--action
             identifier:
                 path: code
                 name: code
 
-    reference-data-job-instance-csv-export-show-launch:
-        module: pim/job/common/edit/launch
+    reference-data-job-instance-csv-export-show-subsection:
+        module: pim/form/common/subsection
         parent: reference-data-job-instance-csv-export-show
-        targetZone: buttons
-        position: 110
+        targetZone: content
         config:
-            label: pim_enrich.form.job_instance.button.export.title
-            route: pim_enrich_job_instance_rest_export_launch
-            identifier:
-                path: code
-                name: code
+            title: pim_import_export.form.job_instance.subsection.last_executions
+
+    reference-data-job-instance-csv-export-show-grid:
+        module: pim/job/common/grid
+        parent: reference-data-job-instance-csv-export-show-subsection
+        position: 1000
+        targetZone: content
+        config:
+            alias: last-export-executions-grid
+            metadata:
+                jobType: export

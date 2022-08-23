@@ -7,7 +7,7 @@ extensions:
         parent: reference-data-job-instance-csv-import-show
         targetZone: main-image
         config:
-            path: bundles/pimui/images/illustration-import-xlsx.svg
+            path: bundles/pimui/images/illustrations/ImportCSV.svg
 
     reference-data-job-instance-csv-import-show-user-navigation:
         module: pim/menu/user-navigation
@@ -37,20 +37,20 @@ extensions:
         aclResourceId: pim_importexport_import_profile_launch
         position: 40
         config:
-            label: pim_enrich.form.job_instance.button.import.launch
+            label: pim_import_export.form.job_instance.button.import.launch
 
     reference-data-job-instance-csv-import-show-file-path:
         module: pim/job/common/file-path
         parent: reference-data-job-instance-csv-import-show-launch-switcher-item
         config:
-            label: pim_enrich.form.job_instance.file_path
+            label: pim_import_export.form.job_instance.file_path
 
     reference-data-job-instance-csv-import-show-import-button:
         module: pim/job/common/edit/launch
         parent: reference-data-job-instance-csv-import-show-file-path
         targetZone: buttons
         config:
-            label: pim_enrich.form.job_instance.button.import.launch
+            label: pim_import_export.form.job_instance.button.import.launch
             route: pim_enrich_job_instance_rest_import_launch
             identifier:
                 path: code
@@ -63,7 +63,8 @@ extensions:
         aclResourceId: pim_importexport_import_profile_launch
         position: 50
         config:
-            label: pim_enrich.form.job_instance.button.import.upload_file
+            allowedKey: uploadAllowed
+            label: pim_import_export.form.job_instance.button.import.upload_file
 
     reference-data-job-instance-csv-import-show-upload:
         module: pim/job/common/edit/upload
@@ -77,7 +78,7 @@ extensions:
         parent: reference-data-job-instance-csv-import-show-upload-switcher-item
         position: 60
         config:
-            label: pim_enrich.form.job_instance.button.import.upload
+            label: pim_import_export.form.job_instance.button.import.upload
             route: pim_enrich_job_instance_rest_import_launch
             identifier:
                 path: code
@@ -88,7 +89,7 @@ extensions:
         parent: reference-data-job-instance-csv-import-show
         targetZone: content
         config:
-            title: pim_enrich.form.job_instance.subsection.last_executions
+            title: pim_import_export.form.job_instance.subsection.last_executions
 
     reference-data-job-instance-csv-import-show-grid:
         module: pim/job/common/grid
@@ -111,8 +112,9 @@ extensions:
         parent: reference-data-job-instance-csv-import-show
         targetZone: buttons
         position: 100
+        aclResourceId: pim_importexport_import_profile_edit
         config:
-            label: pim_enrich.form.job_instance.button.edit.title
+            label: pim_common.edit
             route: pim_importexport_import_profile_edit
             buttonClass: AknButton AknButton--action
             identifier:
