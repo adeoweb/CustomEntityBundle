@@ -3,11 +3,11 @@ extensions:
     pim-menu-reference_data:
         module: pim/menu/tab
         parent: pim-menu
-        position: 111
+        position: 55
         targetZone: mainMenu
         config:
             title: pim_menu.tab.reference_data
-            iconModifier: iconSettings
+            iconModifier: iconReferenceEntity
 
     pim-menu-reference_data-column:
         module: pim/menu/column
