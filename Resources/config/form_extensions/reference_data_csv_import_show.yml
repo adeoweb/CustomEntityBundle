@@ -21,8 +21,8 @@ extensions:
         module: pim/common/breadcrumbs
         parent: reference-data-job-instance-csv-import-show
         targetZone: breadcrumbs
-        config:
-            tab: pim-menu-imports
+#        config:
+#            tab: pim-menu-imports
 
     reference-data-job-instance-csv-import-show-switcher:
         module: pim/job-instance/import/switcher
@@ -38,6 +38,7 @@ extensions:
         position: 40
         config:
             label: pim_import_export.form.job_instance.button.import.launch
+            hideForCloudEdition: true
 
     reference-data-job-instance-csv-import-show-file-path:
         module: pim/job/common/file-path
@@ -65,6 +66,7 @@ extensions:
         config:
             allowedKey: uploadAllowed
             label: pim_import_export.form.job_instance.button.import.upload_file
+            hideForCloudEdition: false
 
     reference-data-job-instance-csv-import-show-upload:
         module: pim/job/common/edit/upload
@@ -78,41 +80,31 @@ extensions:
         parent: reference-data-job-instance-csv-import-show-upload-switcher-item
         position: 60
         config:
-            label: pim_import_export.form.job_instance.button.import.upload
+            label: pim_enrich.form.job_instance.button.import.upload
             route: pim_enrich_job_instance_rest_import_launch
             identifier:
                 path: code
                 name: code
 
-    reference-data-job-instance-csv-import-show-subsection:
-        module: pim/form/common/subsection
+    reference-data-job-instance-csv-import-show-last-executions:
+        module: akeneojob/controller/job-instance
         parent: reference-data-job-instance-csv-import-show
+        position: 100
         targetZone: content
-        config:
-            title: pim_import_export.form.job_instance.subsection.last_executions
+    #        config:
+    #            title: pim_enrich.form.job_instance.subsection.last_executions
 
-    reference-data-job-instance-csv-import-show-grid:
-        module: pim/job/common/grid
-        parent: reference-data-job-instance-csv-import-show-subsection
-        position: 1000
-        targetZone: content
-        config:
-            alias: last-import-executions-grid
-            metadata:
-                jobType: import
-
-    reference-data-job-instance-csv-import-show-label:
+    pim-job-instance-csv-base-import-show-label:
         module: pim/job/common/edit/label
         parent: reference-data-job-instance-csv-import-show
         targetZone: title
         position: 100
 
     reference-data-job-instance-csv-import-show-edit:
-        module: pim/common/redirect
+        module: pim/job/common/edit-button
         parent: reference-data-job-instance-csv-import-show
         targetZone: buttons
         position: 100
-        aclResourceId: pim_importexport_import_profile_edit
         config:
             label: pim_common.edit
             route: pim_importexport_import_profile_edit
