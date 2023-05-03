@@ -1,5 +1,5 @@
 {
-    "name": "akeneo-labs/custom-entity-bundle",
+    "name": "adeoweb/custom-entity-bundle",
     "type": "symfony-bundle",
     "description": "Akeneo PIM Custom entity bundle",
     "keywords": ["pim", "akeneo", "ecommerce", "integration", "reference data"],
@@ -17,8 +17,11 @@
         "akeneo/pim-community-dev": "^6.0.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^6.0",
+        "phpspec/phpspec": "^7.0",
         "friendsofphp/php-cs-fixer": "^2.14.0"
+    },
+    "replace": {
+        "akeneo-labs/custom-entity-bundle": "self.version"
     },
     "autoload": {
         "psr-4": {

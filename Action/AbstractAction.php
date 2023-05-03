@@ -2,6 +2,7 @@
 
 namespace Pim\Bundle\CustomEntityBundle\Action;
 
+use Akeneo\Platform\Bundle\UIBundle\Translator\TranslatorDecorator;
 use Pim\Bundle\CustomEntityBundle\Configuration\ConfigurationInterface;
 use Pim\Bundle\CustomEntityBundle\Event\ActionEventManager;
 use Pim\Bundle\CustomEntityBundle\Manager\Registry as ManagerRegistry;
@@ -12,7 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Akeneo\Platform\Bundle\UIBundle\Translator\TranslatorDecorator;
 
 /**
  * @author    Antoine Guigan <antoine@akeneo.com>

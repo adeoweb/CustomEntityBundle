@@ -1,5 +1,9 @@
 /bin/
 /vendor/
 composer.phar
-docker-compose.override.yml
 composer.lock
+.php_cs.cache
+docker-compose.override.yml
+
+# PhpStorm
+.idea
