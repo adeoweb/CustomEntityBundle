@@ -84,16 +84,9 @@ extensions:
                 path: code
                 name: code
 
-    reference-data-job-instance-csv-import-show-subsection:
-        module: pim/form/common/subsection
+    reference-data-job-instance-csv-import-show-last-executions:
+        module: akeneojob/controller/job-instance
         parent: reference-data-job-instance-csv-import-show
-        targetZone: content
-        config:
-            title: pim_import_export.form.job_instance.subsection.last_executions
-
-    reference-data-job-instance-csv-import-show-grid:
-        module: pim/job/common/grid
-        parent: reference-data-job-instance-csv-import-show-subsection
         position: 1000
         targetZone: content
         config:
