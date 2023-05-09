@@ -87,8 +87,12 @@ extensions:
     reference-data-job-instance-csv-import-show-last-executions:
         module: akeneojob/controller/job-instance
         parent: reference-data-job-instance-csv-import-show
-        position: 100
+        position: 1000
         targetZone: content
+        config:
+            alias: last-import-executions-grid
+            metadata:
+                jobType: import
 
     pim-job-instance-csv-base-import-show-label:
         module: pim/job/common/edit/label
