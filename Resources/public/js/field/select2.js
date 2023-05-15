@@ -49,19 +49,21 @@ define(
              * {@inheritdoc}
              */
             render: function () {
-                if (!this.config.value) {
-                    this.config.value = _.first(_.keys(this.config.options));
-                    const data = propertyAccessor.updateProperty(
-                        this.getFormData(),
-                        this.getFieldCode(),
-                        this.config.value
-                    );
+                if (!this.getFormData().configuration.reference_data_name) {
+                    if (!this.config.value) {
+                        this.config.value = _.first(_.keys(this.config.options));
+                        const data = propertyAccessor.updateProperty(
+                            this.getFormData(),
+                            this.getFieldCode(),
+                            this.config.value
+                        );
 
-                    this.setData(data);
+                        this.setData(data);
+                    }
                 }
                 BaseField.prototype.render.apply(this, arguments);
 
                 this.$('.select2').select2();
-            }
+            },
         });
     });
