@@ -14,7 +14,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=8.0.0",
-        "akeneo/pim-community-dev": "^6.0.0"
+        "akeneo/pim-community-dev": "^7.0.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.0",
