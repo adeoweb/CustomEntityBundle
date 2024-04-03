@@ -11,6 +11,8 @@ For more information, please see http://docs.akeneo.com/
 
 | CustomEntityBundle   | Akeneo PIM Community Edition |
 |:--------------------:|:----------------------------:|
+| v7.0.*               | v7.0.*                       |
+| v6.0.*               | v6.0.*                       |
 | v5.0.*               | v5.0.*                       |
 | v4.0.*               | v4.0.*                       |
 | v3.0.*               | v3.0.*                       |
