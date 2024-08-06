@@ -38,6 +38,7 @@ extensions:
         position: 40
         config:
             label: pim_import_export.form.job_instance.button.import.launch
+            hideForCloudEdition: true
 
     reference-data-job-instance-csv-import-show-file-path:
         module: pim/job/common/file-path
@@ -65,6 +66,7 @@ extensions:
         config:
             allowedKey: uploadAllowed
             label: pim_import_export.form.job_instance.button.import.upload_file
+            hideForCloudEdition: false
 
     reference-data-job-instance-csv-import-show-upload:
         module: pim/job/common/edit/upload
@@ -101,7 +103,7 @@ extensions:
         position: 100
 
     reference-data-job-instance-csv-import-show-edit:
-        module: pim/common/redirect
+        module: pim/job/common/edit-button
         parent: reference-data-job-instance-csv-import-show
         targetZone: buttons
         position: 100

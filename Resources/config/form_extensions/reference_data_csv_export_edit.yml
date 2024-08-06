@@ -98,15 +98,14 @@ extensions:
             tooltip: pim_custom_entity.export.csv.entity_name.help
 
     reference-data-job-instance-csv-export-edit-properties-file-path:
-        module: pim/job/common/edit/field/text
+        module: pimimportexport/js/job/common/edit/storage-form
         parent: reference-data-job-instance-csv-export-edit-global
         position: 105
-        targetZone: properties
+        targetZone: additional-properties
         config:
-            fieldCode: configuration.filePath
-            readOnly: false
-            label: pim_import_export.form.job_instance.tab.properties.file_path.title
-            tooltip: pim_import_export.form.job_instance.tab.properties.file_path.help
+            tabCode: pim-job-instance-properties
+            jobType: export
+            fileExtension: csv
 
     reference-data-job-instance-csv-export-edit-properties-decimal-separator:
         module: pim/job/common/edit/field/decimal-separator

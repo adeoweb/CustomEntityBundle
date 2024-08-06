@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pim\Bundle\CustomEntityBundle\Connector\Job\JobParameters\DefaultValuesProvider;
 
 use Akeneo\Tool\Component\Batch\Job\JobInterface;
 use Akeneo\Tool\Component\Batch\Job\JobParameters\DefaultValuesProviderInterface;
+use Akeneo\Tool\Component\Localization\Localizer\LocalizerInterface;
+
+use function in_array;
+use function sys_get_temp_dir;
 
 /**
  * Default value provider for reference data list
@@ -14,38 +20,43 @@ use Akeneo\Tool\Component\Batch\Job\JobParameters\DefaultValuesProviderInterface
  */
 class ReferenceData implements DefaultValuesProviderInterface
 {
-    /** @var DefaultValuesProviderInterface */
-    protected $simpleProvider;
-
     /** @var string[] */
-    protected $supportedJobNames;
+    protected array $supportedJobNames;
 
     /**
-     * @param DefaultValuesProviderInterface $simpleProvider
-     * @param string[]                       $supportedJobNames
+     * @param string[] $supportedJobNames
      */
-    public function __construct(DefaultValuesProviderInterface $simpleProvider, array $supportedJobNames)
+    public function __construct(array $supportedJobNames)
     {
-        $this->simpleProvider    = $simpleProvider;
         $this->supportedJobNames = $supportedJobNames;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultValues()
+    public function getDefaultValues(): array
     {
-        $defaultValues = $this->simpleProvider->getDefaultValues();
-        $defaultValues['reference_data_name'] = null;
-
-        return $defaultValues;
+        return [
+            'reference_data_name'   => null,
+            'storage' => [
+                'type' => 'csv',
+                'file_path' => sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'export_%job_label%_%datetime%.csv',
+            ],
+            'decimal_separator'     => LocalizerInterface::DEFAULT_DECIMAL_SEPARATOR,
+            'date_format'           => LocalizerInterface::DEFAULT_DATE_FORMAT,
+            'delimiter'             => ';',
+            'enclosure'             => '"',
+            'withHeader'            => true,
+            'users_to_notify'       => [],
+            'is_user_authenticated' => false,
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function supports(JobInterface $job)
+    public function supports(JobInterface $job): bool
     {
-        return in_array($job->getName(), $this->supportedJobNames);
+        return in_array($job->getName(), $this->supportedJobNames, true);
     }
 }
