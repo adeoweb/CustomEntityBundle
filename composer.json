@@ -14,7 +14,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=8.0.0",
-        "akeneo/pim-community-dev": "^7.0.0"
+        "akeneo/pim-community-dev": "^7.0.0",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.0",
@@ -27,6 +28,11 @@
         "psr-4": {
             "Pim\\Bundle\\CustomEntityBundle\\": "",
             "Acme\\Bundle\\CustomBundle\\": "docs/examples/CustomBundle"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
         }
     }
 }
