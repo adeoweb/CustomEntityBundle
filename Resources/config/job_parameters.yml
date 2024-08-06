@@ -10,20 +10,20 @@ services:
     pim_custom_entity.job.job_parameters.constraint_collection_provider.reference_data_csv_import:
         class: '%pim_custom_entity.job.job_parameters.constraint_collection_provider.reference_data.class%'
         arguments:
-            - '@akeneo_pim_enrichment.job.job_parameters.constraint_collection_provider.simple_csv_import'
-            - '@pim_custom_entity.configuration.registry'
-            -
-                - '%pim_custom_entity.job_name.csv_reference_data_import%'
+            $configurationRegistry: '@pim_custom_entity.configuration.registry'
+            $supportedJobNames: [ '%pim_custom_entity.job_name.csv_reference_data_import%' ]
+            $decimalSeparators: '%pim_catalog.localization.decimal_separators%'
+            $dateFormats: '%pim_catalog.localization.date_formats%'
         tags:
             - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
 
     pim_custom_entity.job.job_parameters.constraint_collection_provider.reference_data_csv_export:
         class: '%pim_custom_entity.job.job_parameters.constraint_collection_provider.reference_data.class%'
         arguments:
-            - '@akeneo_pim_enrichment.job.job_parameters.constraint_collection_provider.simple_csv_export'
-            - '@pim_custom_entity.configuration.registry'
-            -
-                - '%pim_custom_entity.job_name.csv_reference_data_export%'
+            $configurationRegistry: '@pim_custom_entity.configuration.registry'
+            $supportedJobNames: [ '%pim_custom_entity.job_name.csv_reference_data_export%' ]
+            $decimalSeparators: '%pim_catalog.localization.decimal_separators%'
+            $dateFormats: '%pim_catalog.localization.date_formats%'
         tags:
             - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
 
@@ -40,7 +40,6 @@ services:
     pim_custom_entity.job.job_parameters.default_values_provider.reference_data_csv_import:
         class: '%pim_custom_entity.job.job_parameters.default_values_provider.reference_data.class%'
         arguments:
-            - '@akeneo_pim_enrichment.job.job_parameters.default_values_provider.simple_csv_import'
             -
                 - '%pim_custom_entity.job_name.csv_reference_data_import%'
         tags:
@@ -49,7 +48,6 @@ services:
     pim_custom_entity.job.job_parameters.default_values_provider.reference_data_csv_export:
         class: '%pim_custom_entity.job.job_parameters.default_values_provider.reference_data.class%'
         arguments:
-            - '@akeneo_pim_enrichment.job.job_parameters.default_values_provider.simple_csv_export'
             -
                 - '%pim_custom_entity.job_name.csv_reference_data_export%'
         tags:
