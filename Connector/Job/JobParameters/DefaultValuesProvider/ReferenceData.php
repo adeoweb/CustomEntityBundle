@@ -47,6 +47,7 @@ class ReferenceData implements DefaultValuesProviderInterface
             'delimiter'             => ';',
             'enclosure'             => '"',
             'withHeader'            => true,
+            'uploadAllowed'         => false,
             'users_to_notify'       => [],
             'is_user_authenticated' => false,
         ];

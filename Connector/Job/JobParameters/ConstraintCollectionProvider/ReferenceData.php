@@ -129,6 +129,7 @@ class ReferenceData implements ConstraintCollectionProviderInterface
                             'groups' => ['Default', 'FileConfiguration'],
                         ]
                     ),
+                    'uploadAllowed' => new Type('bool'),
                     'users_to_notify' => [
                         new Type('array'),
                         new All(new Type('string')),
