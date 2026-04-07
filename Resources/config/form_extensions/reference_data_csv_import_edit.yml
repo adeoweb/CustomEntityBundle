@@ -97,7 +97,7 @@ extensions:
             label: pim_custom_entity.import.csv.entity_name.label
             tooltip: pim_custom_entity.import.csv.entity_name.help
 
-    pim-job-instance-csv-product-import-edit-properties-storage:
+    reference-data-job-instance-csv-import-edit-properties-storage:
         module: pimimportexport/js/job/common/edit/storage-form
         parent: reference-data-job-instance-csv-import-edit-global
         position: 120
