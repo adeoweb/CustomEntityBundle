@@ -111,17 +111,15 @@ class ReferenceData implements ConstraintCollectionProviderInterface
                         ),
                     ],
                     'enclosure'  => [
-                        [
-                            new NotBlank(['groups' => ['Default', 'FileConfiguration']]),
-                            new Choice(
-                                [
-                                    'strict' => true,
-                                    'choices' => ['"', "'"],
-                                    'message' => 'The value must be one of " or \'',
-                                    'groups'  => ['Default', 'FileConfiguration'],
-                                ]
-                            ),
-                        ],
+                        new NotBlank(['groups' => ['Default', 'FileConfiguration']]),
+                        new Choice(
+                            [
+                                'strict' => true,
+                                'choices' => ['"', "'"],
+                                'message' => 'The value must be one of " or \'',
+                                'groups'  => ['Default', 'FileConfiguration'],
+                            ]
+                        ),
                     ],
                     'withHeader' => new Type(
                         [
