@@ -111,17 +111,15 @@ class ReferenceData implements ConstraintCollectionProviderInterface
                         ),
                     ],
                     'enclosure'  => [
-                        [
-                            new NotBlank(['groups' => ['Default', 'FileConfiguration']]),
-                            new Choice(
-                                [
-                                    'strict' => true,
-                                    'choices' => ['"', "'"],
-                                    'message' => 'The value must be one of " or \'',
-                                    'groups'  => ['Default', 'FileConfiguration'],
-                                ]
-                            ),
-                        ],
+                        new NotBlank(['groups' => ['Default', 'FileConfiguration']]),
+                        new Choice(
+                            [
+                                'strict' => true,
+                                'choices' => ['"', "'"],
+                                'message' => 'The value must be one of " or \'',
+                                'groups'  => ['Default', 'FileConfiguration'],
+                            ]
+                        ),
                     ],
                     'withHeader' => new Type(
                         [
@@ -129,6 +127,7 @@ class ReferenceData implements ConstraintCollectionProviderInterface
                             'groups' => ['Default', 'FileConfiguration'],
                         ]
                     ),
+                    'uploadAllowed' => new Type('bool'),
                     'users_to_notify' => [
                         new Type('array'),
                         new All(new Type('string')),

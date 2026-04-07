@@ -39,7 +39,7 @@ class ReferenceData implements DefaultValuesProviderInterface
         return [
             'reference_data_name'   => null,
             'storage' => [
-                'type' => 'csv',
+                'type' => 'local',
                 'file_path' => sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'export_%job_label%_%datetime%.csv',
             ],
             'decimal_separator'     => LocalizerInterface::DEFAULT_DECIMAL_SEPARATOR,
@@ -47,6 +47,7 @@ class ReferenceData implements DefaultValuesProviderInterface
             'delimiter'             => ';',
             'enclosure'             => '"',
             'withHeader'            => true,
+            'uploadAllowed'         => false,
             'users_to_notify'       => [],
             'is_user_authenticated' => false,
         ];

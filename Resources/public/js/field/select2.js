@@ -49,16 +49,18 @@ define(
              * {@inheritdoc}
              */
             render: function () {
-                if (!this.getFormData().configuration.reference_data_name) {
-                    if (!this.config.value) {
+                var currentValue = propertyAccessor.accessProperty(this.getFormData(), this.getFieldCode());
+                if (!currentValue && this.config.options && !_.isEmpty(this.config.options)) {
+                    var firstOption = _.first(_.keys(this.config.options));
+                    if (firstOption) {
                         this.config.value = _.first(_.keys(this.config.options));
                         const data = propertyAccessor.updateProperty(
                             this.getFormData(),
                             this.getFieldCode(),
-                            this.config.value
+                            firstOption
                         );
 
-                        this.setData(data);
+                        this.setData(data, {silent: true});
                     }
                 }
                 BaseField.prototype.render.apply(this, arguments);
